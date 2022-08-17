@@ -1,10 +1,16 @@
+.container{
+  max-width: 900px;
+  margin: 0 auto;
+}
 .input__wrapper {
   width: 100%;
   position: relative;
-  margin: 15px 0;
+  
   text-align: center;
   display: flex;
-  justify-content: start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  grid: auto / repeat(2, 250px);
 }
 
 .alert{
@@ -49,8 +55,8 @@
 .button {
   position: relative;
   width: 100%;
-  max-width: 250px;
-  height: 40px;
+  max-width: 300px;
+  height: 30px;
   background: #fe0000;
   color: #fff;
   font-family: Verdana;
@@ -70,7 +76,7 @@
   cursor: pointer;
   margin: 0 auto;
   margin-bottom: 10px;
-  visibility: visible;
+  visibility:  hidden;
   text-shadow: 
 		-0   -1px 0   #000000,
 		 0   -1px 0   #000000,
@@ -91,6 +97,8 @@
 }
 
 .doneImg{
+  position: absolute;
+  right: 5px;
   visibility: hidden;
   width: 30px;
 }

@@ -18,12 +18,7 @@ parseBtn.onclick = parseData;
 xportBtn.onclick = toExel;
 graphBtn.onclick = drawGraph;
 
-
-
-
-
 function readFile(e){
-  
   let file = input.files[0];
   let reader = new FileReader();
   reader.readAsText(file);
@@ -41,7 +36,6 @@ function readFile(e){
 }
 
 function parseData(e){
- 
   const t0 = performance.now();
   changeBtn(parseBtn, "progress");
   setTimeout(function(){
@@ -58,9 +52,7 @@ function parseData(e){
       }
     }
     
-
     );
-    console.log(res);
     labels = res.t;
     y1 = res.y1;
     y2 = res.y2;
@@ -75,35 +67,6 @@ function parseData(e){
   }, 1);
   
 }
-
-
-
-
-
-function showDoneImg(i){
-  i.style.visibility="visible";
-}
-
-function changeBtn(btn, status){
-  switch(status){
-    case("done"):{
-      alertLabel.style.visibility = "hidden";
-      btn.style.backgroundColor = "green";
-      break;
-    };
-    case("progress"):{
-      alertLabel.style.visibility = "visible";
-      btn.style.backgroundColor = "#ffe201";
-      break;
-    }; 
-  }
-  
-}
-
-function average(nums) {
-return Math.round((nums.reduce((partialSum, a) => (1*partialSum) + (1*a), 0))/(nums.length));
-}
-
 
 async function toExel(e){
     const XLSX = await import("https://cdn.sheetjs.com/xlsx-0.18.10/package/xlsx.mjs");
@@ -168,4 +131,28 @@ function drawGraph(e){
   changeBtn(graphBtn, "done");
   showDoneImg(e.target.querySelector('img'));
   }, 1);
+}
+
+function showDoneImg(i){
+  i.style.visibility="visible";
+}
+
+function changeBtn(btn, status){
+  switch(status){
+    case("done"):{
+      alertLabel.style.visibility = "hidden";
+      btn.style.backgroundColor = "green";
+      break;
+    };
+    case("progress"):{
+      alertLabel.style.visibility = "visible";
+      btn.style.backgroundColor = "#ffe201";
+      break;
+    }; 
+  }
+  
+}
+
+function average(nums) {
+return Math.round((nums.reduce((partialSum, a) => (1*partialSum) + (1*a), 0))/(nums.length));
 }

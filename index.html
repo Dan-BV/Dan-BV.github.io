@@ -11,25 +11,17 @@
    
 </head>
 <body>
-    <div class="input__wrapper">
-        <input name="file" type="file" id="file" class="file">
-        <label for="file" class="button file-button">
-            Browse local file 
-            <img class="doneImg" src="img/done.png">
-        </label>
-        <label class="button parse-button">Parse file <img class="doneImg" src="img/done.png"></label>
-        <label class="button xport-button">Export to Exel <img class="doneImg" src="img/done.png"></label>
-        <label class="button graph-button">Draw graph <img class="doneImg" src="img/done.png"></label>
-
-     </div>
-     <div class="alert"><span>Please wait</span></div>
-    
-
-    <canvas id="myChart"></canvas>
-    
-    
-        
-    
+    <div class="container">
+        <div class="input__wrapper">
+            <input name="file" type="file" id="file" class="file">
+            <label for="file" class="button file-button">Browse local file<img class="doneImg" src="img/done.png"></label>
+            <label class="button parse-button">Parse file <img class="doneImg" src="img/done.png"></label>
+            <label class="button xport-button">Export to Exel <img class="doneImg" src="img/done.png"></label>
+            <label class="button graph-button">Draw graph <img class="doneImg" src="img/done.png"></label>
+        </div>
+        <div class="alert"><span>Please wait</span></div>
+        <canvas id="myChart"></canvas>
+    </div>
 </body>
 <script src="js/main.js"></script>
 </html>
