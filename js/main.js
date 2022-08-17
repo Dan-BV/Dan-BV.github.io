@@ -35,7 +35,6 @@ function readFile(e){
     showDoneImg(e.target.parentNode.querySelector('img'));
     data = res.data;
     res.data.shift();
-    console.log(data);
     parseBtn.style.visibility = "visible";
 
   };
