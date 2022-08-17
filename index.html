@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jtl_Parser</title>
+    <script src="js/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+   
+</head>
+<body>
+    <div class="input__wrapper">
+        <input name="file" type="file" id="file" class="file">
+        <label for="file" class="button file-button">
+            Browse local file 
+            <img class="doneImg" src="img/done.png">
+        </label>
+        <label class="button parse-button">Parse file <img class="doneImg" src="img/done.png"></label>
+        <label class="button xport-button">Export to Exel <img class="doneImg" src="img/done.png"></label>
+        <label class="button graph-button">Draw graph <img class="doneImg" src="img/done.png"></label>
+
+     </div>
+     <div class="alert"><span>Please wait</span></div>
+    
+
+    <canvas id="myChart"></canvas>
+    
+    
+        
+    
+</body>
+<script src="js/main.js"></script>
+</html>
