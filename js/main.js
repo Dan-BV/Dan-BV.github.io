@@ -12,6 +12,7 @@ let fileName,
     y1,
     y2,
     dataArr = [["timeStamp", "allThreads", "averageElapsed"]];
+ 
 
 input.onchange = readFile;
 parseBtn.onclick = parseData;
@@ -25,7 +26,6 @@ function readFile(e){
   fileName = file.name.slice(0, file.name.length-4);
   reader.onload = function() {
     res = Papa.parse(reader.result);
-    console.log(res);
     changeBtn(fileBtn, "done");
     showDoneImg(e.target.parentNode.querySelector('img'));
     data = res.data;
@@ -40,19 +40,71 @@ function parseData(e){
   changeBtn(parseBtn, "progress");
   setTimeout(function(){
     let startPoint = data[0][0];
-    let res = {t:[],y1:[],u:[],y2:[],link:[]};
+    let res = {t:[[]],y1:[[]],u:[],y2:[[]],link:[]};
     data.forEach((el, i) => {
       if(i<data.length-1 && el[13] != "null"){
-        res.t.push(Math.round((el[0]-startPoint)/1000));
-        res.y1.push(el[12]);
-        res.u.push(el[1]);
-        res.y2.push(average(res.u));
-        res.link.push(el[13]);
-        dataArr.push([res.t[i], res.y1[i], res.y2[i]]);
+        let i = Math.abs(Math.round((el[0]-startPoint)/1000));
+        if(res.t[i]){
+          res.t[i].push(Math.abs(Math.round((el[0]-startPoint)/1000)));
+          res.y1[i].push(el[12]);
+          res.u.push(el[1]);
+          res.y2[i].push(average(res.u));
+          res.link.push(el[13]);
+        }else{
+          res.t.insert(i, []);
+          res.y1.insert(i, []);
+          res.y2.insert(i, []);
+
+          res.t[i].push(Math.abs(Math.round((el[0]-startPoint)/1000)));
+          res.y1[i].push(el[12]);
+          res.u.push(el[1]);
+          res.y2[i].push(average(res.u));
+          res.link.push(el[13]);
+        }
+               
+      }
+    });
+    //console.log(res);
+    for (var property in res) {
+      if (res.hasOwnProperty(property)) {
+
+        switch (property){
+          case ("t"):{
+            res.t.forEach((el, i) => {
+                res.t[i] = average(el);
+                if(isNaN(res.t[i])){
+                  res.t[i]=(i!=0)?res.t[i-1]:0;
+                }
+                dataArr.push([res.t[i]]);
+            });
+            break;
+          };
+          case ("y1"):{
+            res.y1.forEach((el, i) => {
+                res.y1[i] = average(el);
+                if(isNaN(res.y1[i])){
+                  res.y1[i]=(i!=0)?res.y1[i-1]:0;
+                }
+                dataArr[i+1].push(res.y1[i]);                
+            });
+            break;
+          };
+          case ("y2"):{
+            res.y2.forEach((el, i) => {
+                res.y2[i] = average(el); 
+                if(isNaN(res.y2[i])){
+                  res.y2[i]=(i!=0)?res.y2[i-1]:0;
+                }
+                dataArr[i+1].push(res.y2[i]);                
+            });
+            break;
+          }
+        }
+
+        
       }
     }
-    
-    );
+    console.log(dataArr);
     labels = res.t;
     y1 = res.y1;
     y2 = res.y2;
@@ -154,5 +206,23 @@ function changeBtn(btn, status){
 }
 
 function average(nums) {
-return Math.round((nums.reduce((partialSum, a) => (1*partialSum) + (1*a), 0))/(nums.length));
+  if(Array.isArray(nums)){
+    return Math.abs(Math.round((nums.reduce((partialSum, a) => (1*partialSum) + (1*a), 0))/(nums.length)));
+  }else{
+    console.log(nums);
+    return 0;
+  }
+
 }
+
+Array.prototype.insert = function (index) {
+  let flag = true;
+  while(flag){
+    if(!this[index]){
+      this.push([]);
+    }
+    else{
+      flag = false;
+    }
+  };
+};
